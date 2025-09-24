@@ -72,9 +72,7 @@ class MainActivity : AppCompatActivity() {
             .setTitle("Felicitats!")
             .setMessage("Has encertat el número en $intents intents.\nVols tornar a jugar?")
             .setPositiveButton("Sí") { _, _ -> reiniciarPartida() }
-            .setNegativeButton("No") { _, _ ->
-                finishAffinity()
-            }
+            .setNegativeButton("No") { _, _ -> finishAffinity() }
             .show()
     }
 
