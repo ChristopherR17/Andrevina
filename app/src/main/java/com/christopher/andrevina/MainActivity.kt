@@ -1,5 +1,6 @@
 package com.christopher.andrevina
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -68,11 +69,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun mostrarFiPartida() {
+        val input = EditText(this)
+        input.hint = "Escriu el teu nom"
+
         AlertDialog.Builder(this)
             .setTitle("Felicitats!")
-            .setMessage("Has encertat el número en $intents intents.\nVols tornar a jugar?")
-            .setPositiveButton("Sí") { _, _ -> reiniciarPartida() }
-            .setNegativeButton("No") { _, _ -> finishAffinity() }
+            .setMessage("Has encertat el número en $intents intents.\nIntrodueix el teu nom:")
+            .setView(input)
+            .setPositiveButton("Sí") { _, _ ->
+                val nom = input.text.toString().ifEmpty { "Jugador Anònim" }
+                HallOfFameActivity.afegirPartida("$nom - $intents intents")
+                reiniciarPartida()
+            }
+            .setNegativeButton("No") { _, _ ->
+                val nom = input.text.toString().ifEmpty { "Jugador Anònim" }
+                HallOfFameActivity.afegirPartida("$nom - $intents intents")
+
+                val intent = Intent(this, HallOfFameActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
             .show()
     }
 
