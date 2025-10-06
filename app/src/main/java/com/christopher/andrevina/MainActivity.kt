@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tvHistorial: TextView
     private lateinit var tvIntents: TextView
     private lateinit var scrollView: ScrollView
+    private lateinit var btnRecords: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,11 +29,12 @@ class MainActivity : AppCompatActivity() {
         tvHistorial = findViewById(R.id.tvHistorial)
         tvIntents = findViewById(R.id.tvIntents)
         scrollView = findViewById(R.id.scrollView2)
+        btnRecords = findViewById(R.id.btnRecords)
 
         // Generar número inicial
         reiniciarPartida()
 
-        // Listener botó
+        // Listener del botó "Endevina"
         button.setOnClickListener {
             val entrada = editText.text.toString()
             if (entrada.isEmpty()) {
@@ -60,6 +62,12 @@ class MainActivity : AppCompatActivity() {
             }
 
             editText.text.clear()
+        }
+
+        // Listener del botó "Veure Rècords"
+        btnRecords.setOnClickListener {
+            val intent = Intent(this, HallOfFameActivity::class.java)
+            startActivity(intent)
         }
     }
 
